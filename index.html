@@ -21,7 +21,7 @@
 <article class="panel"><div class="head"><div><div class="side enemy">ENEMY</div><h2>Enemy team</h2></div><span id="ec" class="sub">0 / 5</span></div><div id="esel" class="selected"></div><input id="esearch" type="search" placeholder="Search champion…" autocomplete="off"><div id="echoices" class="choices"></div></article>
 </section>
 <section class="panel"><div class="head"><div><h2>Your jungle pool</h2><p class="sub">Ability = your comfort. Meta = current strength.</p></div><button id="add" class="btn primary">+ Add</button></div><div id="pool" class="pool"></div></section>
-<footer><span>Patch model: 7.2e baseline</span><span>Saved on this device</span></footer>
+<footer><span>Patch model: 7.2e baseline • build 1.1</span><span>Saved on this device</span></footer>
 </main>
 
 <dialog id="settingsDlg"><div class="modal"><div class="head"><div><div class="eyebrow">SCORING</div><h2>Weights</h2></div><button id="closeSettings" class="btn">✕</button></div><p class="sub">Draft fit should matter most, but comfort can override a small matchup edge.</p><div class="setting"><label>Draft fit <b id="dwv"></b></label><input id="dw" type="range" min="1" max="10"></div><div class="setting"><label>Your ability <b id="swv"></b></label><input id="sw" type="range" min="1" max="10"></div><div class="setting"><label>Meta strength <b id="mwv"></b></label><input id="mw" type="range" min="1" max="10"></div><div class="actions"><button id="reset" class="btn">Reset</button><button id="doneSettings" class="btn primary">Done</button></div></div></dialog>
@@ -88,7 +88,7 @@ function syncW(){[["dw","draft","dwv"],["sw","skill","swv"],["mw","meta","mwv"]]
 $("asearch").oninput=()=>renderSide("a");$("esearch").oninput=()=>renderSide("e");$("clear").onclick=()=>{state.allies=[];state.enemies=[];$("asearch").value=$("esearch").value="";save();renderSide("a");renderSide("e");renderRecs()};
 $("settings").onclick=()=>{syncW();$("settingsDlg").showModal()};$("closeSettings").onclick=$("doneSettings").onclick=()=>$("settingsDlg").close();[["dw","draft","dwv"],["sw","skill","swv"],["mw","meta","mwv"]].forEach(([id,k,v])=>$(id).oninput=()=>{state.weights[k]=+$(id).value;$(v).textContent=$(id).value+"/10";save();renderRecs()});$("reset").onclick=()=>{state.weights={draft:8,skill:7,meta:4};syncW();save();renderRecs()};
 $("add").onclick=()=>{fillAdd();$("addDlg").showModal()};$("closeAdd").onclick=$("cancelAdd").onclick=()=>$("addDlg").close();$("ns").oninput=()=>$("nsv").textContent=(+$("ns").value).toFixed(1);$("nm").oninput=()=>$("nmv").textContent=(+$("nm").value).toFixed(1);$("addForm").onsubmit=e=>{e.preventDefault();const n=$("addName").value;if(n&&!state.pool.some(x=>x.name===n)){state.pool.push({name:n,skill:+$("ns").value,meta:+$("nm").value});save();$("addDlg").close();renderPool();renderRecs()}};
-renderSide("a");renderSide("e");renderPool();renderRecs();if("serviceWorker"in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("./service-worker.js").catch(()=>{});
+renderSide("a");renderSide("e");renderPool();renderRecs();if("serviceWorker"in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("./service-worker.js").then(reg=>reg.update()).catch(()=>{});
 })();
 </script>
 </body></html>
