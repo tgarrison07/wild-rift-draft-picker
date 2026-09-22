@@ -1,0 +1,18 @@
+{
+  "name": "Wild Rift Jungle Draft Picker",
+  "short_name": "Jungle Draft",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "description": "Fast Wild Rift jungle recommendations from your personal champion pool.",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
