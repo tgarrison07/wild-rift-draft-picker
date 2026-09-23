@@ -1,4 +1,4 @@
-const CACHE="jungle-draft-v6";
+const CACHE="jungle-draft-v7";
 const ASSETS=["./manifest.webmanifest","./icon.svg"];
 
 self.addEventListener("install",event=>{
